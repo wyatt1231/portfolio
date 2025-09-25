@@ -70,7 +70,7 @@ const About = forwardRef<HTMLElement, AboutProps>(({ onContactClick }, forwarded
                 Let's Work Together
               </Button>
 
-              <Button variant="secondary" href="/MarcMontivelesResume.pdf" external>
+              <Button variant="secondary" href={`${import.meta.env.BASE_URL}MarcMontivelesResume.pdf`} external>
                 <FiDownload style={{ marginRight: "8px" }} />
                 Download Resume
               </Button>
@@ -79,7 +79,7 @@ const About = forwardRef<HTMLElement, AboutProps>(({ onContactClick }, forwarded
 
           <motion.div className="about__image" variants={itemVariants}>
             <div className="about__photo">
-              <img src="/profile-photo.jpg" alt="Marc Montiveles - Full Stack Developer" loading="lazy" />
+              <img src={`${import.meta.env.BASE_URL}profile-photo.jpg`} alt="Marc Montiveles - Full Stack Developer" loading="lazy" />
             </div>
           </motion.div>
         </motion.div>
