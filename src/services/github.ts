@@ -1,20 +1,21 @@
-import axios from 'axios';
-import { Project, ProjectLanguages, ApiResponse } from '../types';
+import axios from "axios";
+import { ApiResponse, Project, ProjectLanguages } from "../types";
 
-const GITHUB_API_BASE = 'https://api.github.com';
+const GITHUB_API_BASE = "https://api.github.com";
 
 // GitHub API client
 const githubApi = axios.create({
   baseURL: GITHUB_API_BASE,
   headers: {
-    'Accept': 'application/vnd.github.v3+json',
+    Accept: "application/vnd.github.v3+json",
   },
 });
 
 // Add auth token if available (for higher rate limits)
-const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
+const GITHUB_TOKEN =
+  import.meta.env.VITE_GITHUB_TOKEN || `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`;
 if (GITHUB_TOKEN) {
-  githubApi.defaults.headers.common['Authorization'] = `token ${GITHUB_TOKEN}`;
+  githubApi.defaults.headers.common["Authorization"] = `token ${GITHUB_TOKEN}`;
 }
 
 export class GitHubService {
@@ -43,15 +44,15 @@ export class GitHubService {
 
   private handleApiError(error: any): string {
     if (error.response?.status === 403) {
-      return 'GitHub API rate limit exceeded. Please try again later.';
+      return "GitHub API rate limit exceeded. Please try again later.";
     }
     if (error.response?.status === 404) {
-      return 'GitHub user not found.';
+      return "GitHub user not found.";
     }
-    if (error.code === 'NETWORK_ERROR') {
-      return 'Network error. Please check your internet connection.';
+    if (error.code === "NETWORK_ERROR") {
+      return "Network error. Please check your internet connection.";
     }
-    return 'Failed to fetch data from GitHub. Please try again later.';
+    return "Failed to fetch data from GitHub. Please try again later.";
   }
 
   async getUserRepositories(username: string): Promise<ApiResponse<Project[]>> {
@@ -65,8 +66,8 @@ export class GitHubService {
     try {
       const response = await githubApi.get(`/users/${username}/repos`, {
         params: {
-          type: 'owner',
-          sort: 'updated',
+          type: "owner",
+          sort: "updated",
           per_page: 100,
         },
       });
@@ -78,7 +79,7 @@ export class GitHubService {
           id: repo.id,
           name: repo.name,
           full_name: repo.full_name,
-          description: repo.description || 'No description provided',
+          description: repo.description || "No description provided",
           html_url: repo.html_url,
           homepage: repo.homepage,
           language: repo.language,
@@ -106,7 +107,7 @@ export class GitHubService {
       this.setCachedData(cacheKey, repositories);
       return { data: repositories, loading: false };
     } catch (error: any) {
-      console.error('Error fetching repositories:', error);
+      console.error("Error fetching repositories:", error);
       return {
         data: [],
         loading: false,
@@ -124,13 +125,13 @@ export class GitHubService {
     }
 
     try {
-      const response = await githubApi.get(languagesUrl.replace(GITHUB_API_BASE, ''));
+      const response = await githubApi.get(languagesUrl.replace(GITHUB_API_BASE, ""));
       const languages = response.data;
 
       this.setCachedData(cacheKey, languages);
       return languages;
     } catch (error) {
-      console.error('Error fetching repository languages:', error);
+      console.error("Error fetching repository languages:", error);
       return {};
     }
   }
@@ -150,7 +151,7 @@ export class GitHubService {
       this.setCachedData(cacheKey, content);
       return content;
     } catch (error) {
-      console.error('Error fetching repository readme:', error);
+      console.error("Error fetching repository readme:", error);
       return null;
     }
   }
@@ -171,7 +172,7 @@ export class GitHubService {
       this.setCachedData(cacheKey, profile);
       return profile;
     } catch (error) {
-      console.error('Error fetching user profile:', error);
+      console.error("Error fetching user profile:", error);
       return null;
     }
   }
@@ -195,49 +196,49 @@ export class GitHubService {
         color: GitHubService.getLanguageColor(name),
       }))
       .sort((a, b) => b.bytes - a.bytes)
-      .filter(lang => lang.percentage >= 1); // Only show languages with 1% or more
+      .filter((lang) => lang.percentage >= 1); // Only show languages with 1% or more
   }
 
   // Get language color (GitHub style)
   static getLanguageColor(language: string): string {
     const colors: Record<string, string> = {
-      JavaScript: '#f1e05a',
-      TypeScript: '#2b7489',
-      Python: '#3572A5',
-      Java: '#b07219',
-      'C#': '#239120',
-      PHP: '#4F5D95',
-      Ruby: '#701516',
-      Go: '#00ADD8',
-      Rust: '#dea584',
-      Swift: '#ffac45',
-      Kotlin: '#F18E33',
-      Dart: '#00B4AB',
-      HTML: '#e34c26',
-      CSS: '#1572B6',
-      SCSS: '#c6538c',
-      Vue: '#2c3e50',
-      React: '#61DAFB',
-      Angular: '#DD0031',
-      'Node.js': '#68a063',
+      JavaScript: "#f1e05a",
+      TypeScript: "#2b7489",
+      Python: "#3572A5",
+      Java: "#b07219",
+      "C#": "#239120",
+      PHP: "#4F5D95",
+      Ruby: "#701516",
+      Go: "#00ADD8",
+      Rust: "#dea584",
+      Swift: "#ffac45",
+      Kotlin: "#F18E33",
+      Dart: "#00B4AB",
+      HTML: "#e34c26",
+      CSS: "#1572B6",
+      SCSS: "#c6538c",
+      Vue: "#2c3e50",
+      React: "#61DAFB",
+      Angular: "#DD0031",
+      "Node.js": "#68a063",
     };
 
-    return colors[language] || '#6e7681';
+    return colors[language] || "#6e7681";
   }
 
   // Format repository topics for filtering
   static getUniqueTopics(repositories: Project[]): string[] {
-    const allTopics = repositories.flatMap(repo => repo.topics);
+    const allTopics = repositories.flatMap((repo) => repo.topics);
     return Array.from(new Set(allTopics)).sort();
   }
 
   // Format date for display
   static formatDate(dateString: string): string {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
   }
 
