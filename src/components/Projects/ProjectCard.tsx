@@ -39,7 +39,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onLanguagesFetch, is
     return GitHubService.formatDate(dateString);
   };
 
-  const isRecentlyUpdated = GitHubService.isRecentlyUpdated(project.updated_at);
 
   return (
     <motion.div
@@ -61,16 +60,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onLanguagesFetch, is
               {project.name}
             </a>
           </h3>
-          {isRecentlyUpdated && (
-            <motion.span
-              className="project-card__badge"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              Recently Updated
-            </motion.span>
-          )}
         </div>
 
         <p className="project-card__description">
