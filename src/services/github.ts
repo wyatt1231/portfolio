@@ -12,9 +12,7 @@ const githubApi = axios.create({
 });
 
 // Add auth token if available (for higher rate limits)
-// const GITHUB_TOKEN =
-//   import.meta.env.VITE_GITHUB_TOKEN ||;
-const GITHUB_TOKEN = `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`;
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 if (GITHUB_TOKEN) {
   githubApi.defaults.headers.common["Authorization"] = `token ${GITHUB_TOKEN}`;
 }
@@ -75,7 +73,7 @@ export class GitHubService {
 
       // Filter out forks, archived repos, and portfolio repo, sort by stars and recent activity
       const repositories: Project[] = response.data
-        .filter((repo: any) => !repo.fork && !repo.archived && repo.name !== 'portfolio')
+        .filter((repo: any) => !repo.fork && !repo.archived && repo.name !== "portfolio")
         .map((repo: any) => ({
           id: repo.id,
           name: repo.name,

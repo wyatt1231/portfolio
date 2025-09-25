@@ -6,7 +6,7 @@ import Button from "../common/Button";
 import ProjectCard from "./ProjectCard";
 
 // Get GitHub username from environment variables
-const GITHUB_USERNAME = import.meta.env.VITE_GITHUB_USERNAME || "wyatt1231";
+const GITHUB_USERNAME = "wyatt1231";
 
 const Projects = forwardRef<HTMLElement>((_, forwardedRef) => {
   const internalRef = useRef<HTMLElement>(null);
