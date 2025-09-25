@@ -1,0 +1,61 @@
+.footer {
+  background: $navy;
+  color: $slate;
+  padding: $spacing-2xl 0;
+  text-align: center;
+
+  &__container {
+    @include container;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+
+    @include respond-to(sm) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__text {
+    font-family: $font-family-mono;
+    font-size: $font-size-sm;
+    color: $slate;
+    margin: 0;
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity $transition-base;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    a {
+      color: $green;
+      text-decoration: none;
+      transition: all $transition-base;
+
+      &:hover {
+        text-decoration: underline;
+        color: $lightest-slate;
+      }
+    }
+  }
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  main {
+    flex: 1;
+
+    section {
+      margin-bottom: 3em;
+    }
+  }
+}

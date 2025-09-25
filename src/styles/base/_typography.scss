@@ -1,0 +1,221 @@
+// Import Google Fonts with improved performance
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@300;400;500;600&display=swap');
+
+// Base typography
+body {
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-normal;
+  color: $text-dark;
+  background-color: $background-light;
+}
+
+// Headings
+h1 {
+  @include heading-1;
+  margin-bottom: $spacing-lg;
+}
+
+h2 {
+  @include heading-2;
+  margin-bottom: $spacing-md;
+}
+
+h3 {
+  @include heading-3;
+  margin-bottom: $spacing-md;
+}
+
+h4 {
+  font-family: $font-family-heading;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+  color: $text-dark;
+  margin-bottom: $spacing-sm;
+}
+
+h5 {
+  font-family: $font-family-heading;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+  color: $text-dark;
+  margin-bottom: $spacing-sm;
+}
+
+h6 {
+  font-family: $font-family-heading;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+  color: $text-dark;
+  margin-bottom: $spacing-sm;
+}
+
+// Paragraphs
+p {
+  @include body-base;
+  margin-bottom: $spacing-md;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Large text
+.text-large {
+  @include body-large;
+}
+
+// Small text
+.text-small {
+  font-size: $font-size-sm;
+  color: $text-light;
+}
+
+// Extra small text
+.text-xs {
+  font-size: $font-size-xs;
+  color: $text-muted;
+}
+
+// Text colors
+.text-primary {
+  color: $primary-color;
+}
+
+.text-secondary {
+  color: $secondary-color;
+}
+
+.text-muted {
+  color: $text-muted;
+}
+
+.text-light {
+  color: $text-light;
+}
+
+.text-dark {
+  color: $text-dark;
+}
+
+// Text weights
+.font-light {
+  font-weight: $font-weight-light;
+}
+
+.font-regular {
+  font-weight: $font-weight-regular;
+}
+
+.font-medium {
+  font-weight: $font-weight-medium;
+}
+
+.font-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+.font-bold {
+  font-weight: $font-weight-bold;
+}
+
+// Text alignment
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// Links
+a {
+  color: $primary-color;
+  transition: color $transition-base;
+
+  &:hover {
+    color: darken($primary-color, 10%);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// Lists
+ul,
+ol {
+  margin-bottom: $spacing-md;
+  padding-left: $spacing-lg;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+li {
+  margin-bottom: $spacing-xs;
+  color: $text-light;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Code
+code {
+  font-family: 'Fira Code', 'Monaco', 'Menlo', monospace;
+  font-size: 0.875em;
+  background-color: rgba($primary-color, 0.1);
+  color: $primary-color;
+  padding: 0.125rem 0.25rem;
+  border-radius: $border-radius-sm;
+}
+
+pre {
+  background-color: $background-dark;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-md;
+  padding: $spacing-md;
+  overflow-x: auto;
+  margin-bottom: $spacing-md;
+
+  code {
+    background: none;
+    color: $text-dark;
+    padding: 0;
+  }
+}
+
+// Blockquotes
+blockquote {
+  border-left: 4px solid $primary-color;
+  padding-left: $spacing-lg;
+  margin: $spacing-lg 0;
+  font-style: italic;
+  color: $text-light;
+}
+
+// Horizontal rule
+hr {
+  border: none;
+  height: 1px;
+  background-color: $border-color;
+  margin: $spacing-2xl 0;
+}

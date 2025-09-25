@@ -1,0 +1,245 @@
+.experience {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: $section-padding 0;
+  @include container;
+  position: relative;
+
+  &__container {
+    @include container;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-4xl;
+
+    @include respond-to(sm) {
+      margin-bottom: $spacing-5xl;
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: $spacing-sm 0 $spacing-2xl;
+    width: 100%;
+    font-size: clamp(26px, 5vw, 32px);
+    font-weight: 600;
+    color: $lightest-slate;
+    line-height: 1.1;
+    white-space: nowrap;
+
+    &:before {
+      counter-increment: section 1;
+      content: "0" counter(section) ".";
+      margin-right: $spacing-sm;
+      color: $green;
+      font-family: $font-family-mono;
+      font-size: clamp(16px, 3vw, 20px);
+      font-weight: 400;
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      width: 300px;
+      height: 1px;
+      margin-left: $spacing-lg;
+      background-color: $lightest-navy;
+    }
+  }
+
+  &__subtitle {
+    font-size: $font-size-xl;
+    color: $slate;
+    max-width: 600px;
+    margin: 0 auto $spacing-3xl;
+    text-align: center;
+  }
+
+  &__timeline {
+    position: relative;
+    margin: 0 auto;
+  }
+
+  &__item {
+    position: relative;
+    margin-bottom: $spacing-4xl;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+
+    &.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__content {
+    @include card;
+    @include card-hover;
+    padding: $spacing-2xl;
+    position: relative;
+  }
+
+  &__period {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    color: $green;
+    font-family: $font-family-mono;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-regular;
+    margin-bottom: $spacing-md;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__company {
+    font-family: $font-family-heading;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $lightest-slate;
+    margin-bottom: $spacing-xs;
+
+    a {
+      color: $green;
+      text-decoration: none;
+      transition: all $transition-base;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__position {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+    color: $light-slate;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__location {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: $font-size-sm;
+    color: $slate;
+    margin-bottom: $spacing-lg;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__description {
+    font-size: $font-size-base;
+    color: $slate;
+    margin-bottom: $spacing-lg;
+    line-height: 1.5;
+  }
+
+  &__achievements {
+    list-style: none;
+    margin-bottom: $spacing-lg;
+
+    li {
+      position: relative;
+      padding-left: $spacing-lg;
+      margin-bottom: $spacing-sm;
+      color: $slate;
+      line-height: 1.5;
+
+      &::before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: $green;
+        font-weight: $font-weight-bold;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+
+  &__tech-tag {
+    padding: $spacing-xs $spacing-sm;
+    background: rgba($green, 0.1);
+    color: $green;
+    border: 1px solid rgba($green, 0.2);
+    border-radius: $border-radius-sm;
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-regular;
+    transition: all $transition-base;
+
+    &:hover {
+      background: rgba($green, 0.2);
+      transform: translateY(-1px);
+    }
+  }
+
+  // Animation delays for staggered effect
+  &__item {
+    &:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+    &:nth-child(2) {
+      transition-delay: 0.2s;
+    }
+    &:nth-child(3) {
+      transition-delay: 0.3s;
+    }
+    &:nth-child(4) {
+      transition-delay: 0.4s;
+    }
+    &:nth-child(5) {
+      transition-delay: 0.5s;
+    }
+  }
+
+  // Current position styling
+  &__item--current {
+    .experience__marker {
+      background: $primary-color;
+      border-color: $primary-color;
+      animation: pulse 2s ease-in-out infinite;
+
+      &::after {
+        background: white;
+      }
+    }
+
+    .experience__period {
+      color: $green;
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba($primary-color, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 $spacing-sm rgba($primary-color, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba($primary-color, 0);
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.typewriter {
+  display: inline-block;
+
+  &__cursor {
+    display: inline-block;
+    color: $green;
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+    margin-left: 2px;
+    font-weight: $font-weight-regular;
+
+    &--visible {
+      opacity: 1;
+    }
+  }
+}

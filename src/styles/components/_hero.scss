@@ -1,0 +1,265 @@
+.hero {
+  min-height: calc(100vh - #{$nav-height});
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: $navy;
+  overflow: hidden;
+  padding: 0;
+
+  &__container {
+    @include container;
+    position: relative;
+    z-index: 1;
+    padding-left: $spacing-2xl;
+  }
+
+  &__content {
+    max-width: 1000px;
+    text-align: left;
+  }
+
+  &__greeting {
+    font-family: $font-family-mono;
+    font-size: $font-size-base;
+    font-weight: $font-weight-regular;
+    color: $green;
+    margin-bottom: $spacing-lg;
+    opacity: 0;
+    animation: slideUp 0.8s ease-out 0.2s forwards;
+
+    @include respond-to(sm) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__name {
+    font-family: $font-family-heading;
+    font-size: clamp(40px, 8vw, 80px);
+    font-weight: $font-weight-semibold;
+    color: $lightest-slate;
+    line-height: 1.1;
+    margin-bottom: $spacing-xs;
+    opacity: 0;
+    animation: slideUp 0.8s ease-out 0.4s forwards;
+  }
+
+  &__title {
+    font-family: $font-family-heading;
+    font-size: clamp(40px, 8vw, 80px);
+    font-weight: $font-weight-semibold;
+    color: $slate;
+    line-height: 1.1;
+    margin-bottom: $spacing-xl;
+    opacity: 0;
+    animation: slideUp 0.8s ease-out 0.6s forwards;
+  }
+
+  &__description {
+    font-size: $font-size-xl;
+    color: $slate;
+    line-height: 1.3;
+    margin-bottom: $spacing-4xl;
+    max-width: 540px;
+    opacity: 0;
+    animation: slideUp 0.8s ease-out 0.8s forwards;
+  }
+
+  &__cta {
+    opacity: 0;
+    animation: slideUp 0.8s ease-out 1s forwards;
+
+    &-button {
+      color: $green;
+      background: linear-gradient(135deg, transparent 0%, rgba($green, 0.05) 50%, transparent 100%);
+      border: 1px solid $green;
+      border-radius: $border-radius-sm;
+      padding: $spacing-lg $spacing-xl;
+      font-family: $font-family-mono;
+      font-size: $font-size-sm;
+      line-height: 1;
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba($green, 0.3),
+          transparent
+        );
+        transition: left 0.6s ease-out;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba($green, 0.1);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      &:hover,
+      &:focus {
+        outline: none;
+        background: rgba($green, 0.1);
+        box-shadow:
+          0 8px 25px rgba($green, 0.3),
+          0 0 20px rgba($green, 0.1),
+          inset 0 1px 0 rgba($green, 0.2);
+        transform: translateY(-3px) scale(1.02);
+        border-color: rgba($green, 0.8);
+        color: rgba($green, 0.9);
+
+        &::before {
+          left: 100%;
+        }
+
+        &::after {
+          opacity: 1;
+        }
+      }
+
+      &:active {
+        transform: translateY(-1px) scale(1.01);
+        box-shadow:
+          0 4px 15px rgba($green, 0.4),
+          0 0 10px rgba($green, 0.2);
+      }
+    }
+  }
+
+  &__button {
+    @include button-primary;
+    padding: $spacing-md $spacing-2xl;
+    font-size: $font-size-lg;
+    border-radius: $border-radius-full;
+    box-shadow: $shadow-lg;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-2xl;
+    }
+
+    &--secondary {
+      @include button-secondary;
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &__scroll-indicator {
+    position: absolute;
+    bottom: $spacing-2xl;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+    color: $slate;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    transition: all $transition-base;
+    opacity: 0;
+    animation: slideUp 0.8s ease-out 1s forwards;
+
+    &:hover {
+      color: $green;
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    &::after {
+      content: '';
+      width: 1px;
+      height: $spacing-3xl;
+      background: linear-gradient(to bottom, $green, transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+  }
+
+  // Floating elements animation
+  &__floating-element {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+
+    &:nth-child(1) {
+      top: 20%;
+      left: 10%;
+      animation-delay: -2s;
+    }
+
+    &:nth-child(2) {
+      top: 60%;
+      right: 15%;
+      animation-delay: -4s;
+    }
+
+    &:nth-child(3) {
+      bottom: 30%;
+      left: 20%;
+      animation-delay: -1s;
+    }
+
+    &:nth-child(4) {
+      top: 30%;
+      right: 30%;
+      animation-delay: -3s;
+    }
+  }
+}
+
+// Keyframe animations
+@keyframes scrollPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-$spacing-sm) rotate(2deg);
+  }
+  66% {
+    transform: translateY($spacing-xs) rotate(-2deg);
+  }
+}
+
+// Responsive adjustments
+@include respond-to(sm) {
+  .hero {
+    &__greeting {
+      font-size: $font-size-xl;
+    }
+
+    &__subtitle {
+      font-size: $font-size-xl;
+      line-height: $line-height-loose;
+    }
+
+    &__button {
+      padding: $spacing-lg $spacing-2xl;
+    }
+  }
+}

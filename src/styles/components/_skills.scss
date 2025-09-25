@@ -1,0 +1,183 @@
+.skills {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: $section-padding 0;
+  @include container;
+
+  &__container {
+    @include container;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-4xl;
+
+    @include respond-to(sm) {
+      margin-bottom: $spacing-5xl;
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: $spacing-sm 0 $spacing-2xl;
+    width: 100%;
+    font-size: clamp(26px, 5vw, 32px);
+    font-weight: 600;
+    color: $lightest-slate;
+    line-height: 1.1;
+    white-space: nowrap;
+
+    &:before {
+      counter-increment: section 1;
+      content: '0' counter(section) '.';
+      margin-right: $spacing-sm;
+      color: $green;
+      font-family: $font-family-mono;
+      font-size: clamp(16px, 3vw, 20px);
+      font-weight: 400;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      width: 300px;
+      height: 1px;
+      margin-left: $spacing-lg;
+      background-color: $lightest-navy;
+    }
+  }
+
+  &__subtitle {
+    font-size: $font-size-xl;
+    color: $slate;
+    max-width: 600px;
+    margin: 0 auto $spacing-3xl;
+    text-align: center;
+  }
+
+  &__categories {
+    @include grid(1, $spacing-2xl);
+
+    @include respond-to(md) {
+      @include grid(2, $spacing-3xl);
+    }
+
+    @include respond-to(lg) {
+      @include grid(3, $spacing-2xl);
+    }
+  }
+
+  &__category {
+    @include card;
+    @include card-hover;
+    padding: $spacing-2xl;
+    position: relative;
+    overflow: hidden;
+
+    &-header {
+      @include flex-center;
+      margin-bottom: $spacing-xl;
+      gap: $spacing-md;
+    }
+
+    &-icon {
+      @include flex-center;
+      width: $spacing-3xl;
+      height: $spacing-3xl;
+      border-radius: $border-radius-xl;
+      background: rgba($green, 0.1);
+      color: $green;
+      font-size: $font-size-2xl;
+    }
+
+    &-title {
+      font-family: $font-family-heading;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-semibold;
+      color: $lightest-slate;
+      margin: 0;
+    }
+
+    &-skills {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-lg;
+    }
+  }
+
+  &__skill {
+    &-header {
+      @include flex-between;
+      margin-bottom: $spacing-sm;
+    }
+
+    &-name {
+      font-weight: $font-weight-medium;
+      color: $lightest-slate;
+      font-size: $font-size-base;
+    }
+
+    &-level {
+      font-size: $font-size-sm;
+      color: $slate;
+      font-weight: $font-weight-medium;
+    }
+
+    &-bar {
+      position: relative;
+      height: 6px;
+      background: rgba($border-color, 0.5);
+      border-radius: $border-radius-full;
+      overflow: hidden;
+
+      &-fill {
+        height: 100%;
+        background: $green;
+        border-radius: $border-radius-full;
+        transition: width 1.5s ease-out;
+        position: relative;
+      }
+    }
+
+    // Animation states
+    &-bar-fill {
+      width: 0%;
+
+      &.animate {
+        width: var(--skill-level);
+      }
+    }
+  }
+
+
+  // Animation keyframes
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  // Scroll-triggered animations
+  &__category {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+
+    &.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &:nth-child(1) { transition-delay: 0.1s; }
+    &:nth-child(2) { transition-delay: 0.2s; }
+    &:nth-child(3) { transition-delay: 0.3s; }
+    &:nth-child(4) { transition-delay: 0.4s; }
+    &:nth-child(5) { transition-delay: 0.5s; }
+    &:nth-child(6) { transition-delay: 0.6s; }
+  }
+}
