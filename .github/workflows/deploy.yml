@@ -23,13 +23,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Create .env file
-        run: |
-          echo "VITE_GITHUB_TOKEN=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" > .env
-          echo "VITE_GITHUB_USERNAME=wyatt1231" >> .env
-
       - name: Build
         run: npm run build
+        env:
+          VITE_GITHUB_TOKEN: ${{ secrets.VITE_GITHUB_TOKEN }}
+          VITE_GITHUB_USERNAME: wyatt1231
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
